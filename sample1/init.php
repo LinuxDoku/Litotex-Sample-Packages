@@ -7,6 +7,7 @@
  * @copyright: 2010
  */
 class package_sample1 extends package {
+    public static $version = '0.8.10';
     /**
      * Package name
      * @var string
@@ -31,17 +32,27 @@ class package_sample1 extends package {
      * @return bool
      */
     public static function registerHooks(){
-        self::_registerHook(__CLASS__, 'templateSidebarLeft', 0);
+        self::_registerHook(__CLASS__, 'sample1', 0);
         return true;
     }
-
+   public static function registerTplModifications(){
+    	self::_registerTplModification(__CLASS__, 'sample1', 'sample1');
+    	return true;
+    }
     /**
      * Method of the "tempalteSidebarLeft" hook
      * return bool
      */
-    public static function __hook_templateSidebarLeft() {
+    public static function __hook_sample1() {
         // print a little Hello World message
-        echo 'Hello World!';
+        echo '<p><br>Hello World! (sample1)</p>';
         return true;
     }
+	public static function  __tpl_sample1() {
+        return self::__hook_sample1(2);
+    }
+    public static function displayDepExample(){
+    	return "<p>Hallo Welt! Ich bin eine statische Funktion, die mit Hilfe des Paketmanagers automatisch zur Verfügung gestellt wurde. Viel Spaß! Nebenbei, ich komme aus Sample1!</p>";
+    }
+
 }
